@@ -58,16 +58,48 @@
 		BA458989204C1C4D00AB2761 /* E-Car parking */ = {
 			isa = PBXGroup;
 			children = (
-				BA45898A204C1C4D00AB2761 /* AppDelegate.swift */,
-				BA45898C204C1C4D00AB2761 /* ViewController.swift */,
-				BA4589A0204D40E900AB2761 /* MapClass.swift */,
-				BA4589A2204D6EEB00AB2761 /* elements.json */,
-				BA45898E204C1C4D00AB2761 /* Main.storyboard */,
+				BA4589A5204E80BB00AB2761 /* Model */,
+				BA4589A4204E80AC00AB2761 /* View */,
+				BA4589A6204E80C600AB2761 /* Controller */,
 				BA458991204C1C4D00AB2761 /* Assets.xcassets */,
 				BA458993204C1C4D00AB2761 /* LaunchScreen.storyboard */,
 				BA458996204C1C4D00AB2761 /* Info.plist */,
+				BA4589A7204E80E100AB2761 /* Supporting Files */,
 			);
 			path = "E-Car parking";
+			sourceTree = "<group>";
+		};
+		BA4589A4204E80AC00AB2761 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA45898E204C1C4D00AB2761 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA4589A5204E80BB00AB2761 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA4589A0204D40E900AB2761 /* MapClass.swift */,
+				BA4589A2204D6EEB00AB2761 /* elements.json */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA4589A6204E80C600AB2761 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BA45898C204C1C4D00AB2761 /* ViewController.swift */,
+				BA45898A204C1C4D00AB2761 /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA4589A7204E80E100AB2761 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
