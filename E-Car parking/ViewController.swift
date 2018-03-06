@@ -9,11 +9,11 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
    //Global variables and constants
     var pElements: [MapClass] = []
     let regionRadius: CLLocationDistance = 1000 //Sets the radius til 1 km in the map.
-    
+    let locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -27,13 +27,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
         loadInitialData()
         mapView.addAnnotations(pElements)
         
-//        //Testing with info on th map
-//
-//                // show artwork on map
-//                let element = MapClass(title: "Ezenta",locationName: "Hørkær 14",coordinate: CLLocationCoordinate2D(latitude: 55.717771, longitude: 12.437287))
-//                mapView.addAnnotation(element)
-        
-        
+        //TODO:Set up the location manager here.
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    
         
     }
 
@@ -50,25 +49,33 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     //Coverting JSON data into array used for annoneations in mapview
     func loadInitialData() {
-        // 1
+        // Loading JSON file into variables.
         guard let fileName = Bundle.main.path(forResource: "elements", ofType: "json")
             else { return }
         let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
-        
+        //Convert JSON elements one-by-one and use the MapClass attributes to add to array
         guard
             let data = optionalData,
-            // 2
             let json = try? JSONSerialization.jsonObject(with: data),
-            // 3
             let dictionary = json as? [String: Any],
-            // 4
             let works = dictionary["data"] as? [[Any]]
             else { return }
-        // 5
         let validWorks = works.flatMap { MapClass(json: $0) }
         pElements.append(contentsOf: validWorks)
-        print("print")
-        print(pElements[0].locationName)
+
     }
+    
+    func checkLocationAuthorizationStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkLocationAuthorizationStatus()
+    }
+    
 }
 
