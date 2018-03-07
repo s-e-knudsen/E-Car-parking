@@ -15,13 +15,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let regionRadius: CLLocationDistance = 1000 //Sets the radius til 1 km in the map.
     let locationManager = CLLocationManager()
     
+    
     @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //Sets the default location. This to test the app.
-        let initialLocation = CLLocation(latitude: 55.742527, longitude: 12.317348)
-        centerMapOnLocation(location: initialLocation)
+        
+        //let initialLocation = CLLocation(latitude: 55.742527, longitude: 12.317348)
+        //centerMapOnLocation(location: initialLocation)
        
         mapView.delegate = self
         loadInitialData()
@@ -32,6 +34,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+  
     
         
     }
@@ -41,7 +45,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    //MARK: - LocationManager updates where you are on the map
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        let initialLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        centerMapOnLocation(location: initialLocation)
+     
+    }
     //MARK: - Function to center on the map with the location.
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,regionRadius, regionRadius)
