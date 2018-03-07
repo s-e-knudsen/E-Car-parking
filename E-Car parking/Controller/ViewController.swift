@@ -12,7 +12,6 @@ import MapKit
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
    //Global variables and constants
     var pElements: [MapClass] = []
-    let regionRadius: CLLocationDistance = 1000 //Sets the radius til 1 km in the map.
     let locationManager = CLLocationManager()
     
     
@@ -20,14 +19,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Sets the default location. This to test the app.
-        
-        //let initialLocation = CLLocation(latitude: 55.742527, longitude: 12.317348)
-        //centerMapOnLocation(location: initialLocation)
-       
+     
         mapView.delegate = self
         loadInitialData()
         mapView.addAnnotations(pElements)
+        
         
         //TODO:Set up the location manager here.
         locationManager.delegate = self
@@ -35,28 +31,31 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-  
-    
-        
+        initsetup()
     }
 
+    func initsetup() {
+        //Initial setup for the map span and user location.
+        let span = MKCoordinateSpan.init(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
+    
+        if locationManager.location?.coordinate != nil {
+            let region = MKCoordinateRegion.init(center: (locationManager.location?.coordinate)!, span: span)
+            mapView.setRegion(region, animated: true)
+        } else {
+            print("did not get data")
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
-    //MARK: - LocationManager updates where you are on the map
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[locations.count - 1]
-        let initialLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        centerMapOnLocation(location: initialLocation)
-     
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        mapView .setCenter(userLocation.coordinate, animated: true)
     }
-    //MARK: - Function to center on the map with the location.
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,regionRadius, regionRadius)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
+
+
     //Coverting JSON data into array used for annoneations in mapview
     func loadInitialData() {
         // Loading JSON file into variables.
