@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import SwiftyJSON
+import Alamofire
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
    //Global variables and constants
