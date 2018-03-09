@@ -1,0 +1,6 @@
+framework module Pods_E_Car_parking {
+  umbrella header "Pods-E-Car parking-umbrella.h"
+
+  export *
+  module * { export * }
+}
