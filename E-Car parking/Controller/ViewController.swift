@@ -15,6 +15,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var pElements: [MapClass] = []
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var toolBar: UIToolbar!
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -31,6 +32,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+        //Toolbar transarent
+        self.toolBar.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+        self.toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
         
         initsetup()
     }
