@@ -19,7 +19,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var toolBar: UIToolbar!
     
     @IBOutlet weak var mapView: MKMapView!
-
+    @IBOutlet weak var parkContainer: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -38,6 +39,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.toolBar.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.any, barMetrics: UIBarMetrics.default)
         self.toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
         
+        //Make park container with rouded edges
+        parkContainer.layer.cornerRadius = 10
+        
+        // Call init setup
         initsetup()
     }
 
@@ -63,8 +68,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //mapView .setCenter(userLocation.coordinate, animated: true)
     }
 
-    @IBAction func myLocationPressed(_ sender: UIButton) {
-        //This located the user central on screen.
+    @IBAction func addParking(_ sender: UIButton) {
+        //Add code for adding parking here!
+    }
+    
+    @IBAction func deleteParking(_ sender: UIButton) {
+        //Add code for delete (request) for parking here!
+    }
+    
+    @IBAction func myLocationPressed(_ sender: UIBarButtonItem) {
         mapView .setCenter(myLocation.coordinate, animated: true)
     }
     

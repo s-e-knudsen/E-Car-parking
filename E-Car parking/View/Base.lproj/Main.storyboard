@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,30 +21,20 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-Mk-jZa">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcr-Wm-SnE">
-                                <rect key="frame" x="341" y="30" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hcr-Wm-SnE" secondAttribute="height" multiplier="1:1" id="mlj-h9-vte"/>
-                                </constraints>
-                                <state key="normal" image="Tollbar myLocation">
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="myLocationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P4P-1W-8MA"/>
-                                </connections>
-                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNc-9j-y7o">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3dF-f4-aKd"/>
-                                    <barButtonItem image="Toolbar Icons P" landscapeImage="Toolbar Icons P" largeContentSizeImage="Toolbar Icons P" width="47" id="Hk4-O3-brg" userLabel="Parking"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="PkM-wi-kqg"/>
-                                    <barButtonItem image="Tollbar icon no P" landscapeImage="Tollbar icon no P" largeContentSizeImage="Tollbar icon no P" id="WSc-I5-an7" userLabel="No parking"/>
+                                    <barButtonItem image="Tollbar myLocation" landscapeImage="Tollbar myLocation" largeContentSizeImage="Tollbar myLocation" id="WSc-I5-an7" userLabel="MyLocation">
+                                        <connections>
+                                            <action selector="myLocationPressed:" destination="BYZ-38-t0r" id="bl1-lG-M0c"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kKT-bj-vyk"/>
                                     <barButtonItem style="plain" id="HsK-Oy-c44">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ort-gy-qdc">
-                                            <rect key="frame" x="134.5" y="7" width="212" height="30"/>
+                                            <rect key="frame" x="113" y="7" width="212" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Standard"/>
@@ -58,6 +47,40 @@
                                 </items>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJG-4p-n2j" userLabel="MapIcons container">
+                                <rect key="frame" x="15" y="125" width="33" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2GA-9H-436" userLabel="Add parking">
+                                        <rect key="frame" x="0.0" y="2" width="33" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="JNp-Rc-cYu"/>
+                                            <constraint firstAttribute="height" constant="24" id="hnr-lH-H6l"/>
+                                        </constraints>
+                                        <state key="normal" image="Toolbar Icons P"/>
+                                        <connections>
+                                            <action selector="addParking:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Tl-lJ-3ki"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeg-eg-hof" userLabel="Delete parking">
+                                        <rect key="frame" x="0.0" y="44" width="33" height="24"/>
+                                        <state key="normal" image="Tollbar icon no P"/>
+                                        <connections>
+                                            <action selector="deleteParking:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gCu-tW-khp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="2GA-9H-436" firstAttribute="leading" secondItem="tJG-4p-n2j" secondAttribute="leading" id="Ivf-lc-Txt"/>
+                                    <constraint firstAttribute="trailing" secondItem="2GA-9H-436" secondAttribute="trailing" id="Mbe-qc-ND1"/>
+                                    <constraint firstAttribute="bottom" secondItem="oeg-eg-hof" secondAttribute="bottom" constant="2" id="WGV-qZ-pyO"/>
+                                    <constraint firstAttribute="height" constant="70" id="XMZ-n5-T45"/>
+                                    <constraint firstAttribute="width" constant="33" id="Xwc-1z-Cm7"/>
+                                    <constraint firstAttribute="trailing" secondItem="oeg-eg-hof" secondAttribute="trailing" id="hN3-Dl-TI6"/>
+                                    <constraint firstItem="oeg-eg-hof" firstAttribute="leading" secondItem="tJG-4p-n2j" secondAttribute="leading" id="nJx-CV-yeW"/>
+                                    <constraint firstItem="2GA-9H-436" firstAttribute="top" secondItem="tJG-4p-n2j" secondAttribute="top" constant="2" id="qzP-aL-c7r"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -65,13 +88,14 @@
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KN7-tT-z0q"/>
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Pph-VU-zRR"/>
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QlW-nu-mee"/>
-                            <constraint firstItem="hcr-Wm-SnE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="ilq-vn-wNN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hcr-Wm-SnE" secondAttribute="trailing" constant="10" id="xu3-n4-nGM"/>
+                            <constraint firstItem="tJG-4p-n2j" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="105" id="Znw-RQ-gzc"/>
+                            <constraint firstItem="tJG-4p-n2j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="hwC-Yu-Xbi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="o4s-Mk-jZa" id="9IV-16-2iL"/>
+                        <outlet property="parkContainer" destination="tJG-4p-n2j" id="Sh3-Jx-8Gw"/>
                         <outlet property="toolBar" destination="lNc-9j-y7o" id="q62-az-37L"/>
                     </connections>
                 </viewController>
