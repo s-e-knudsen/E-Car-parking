@@ -14,6 +14,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
    //Global variables and constants
     var pElements: [MapClass] = []
     let locationManager = CLLocationManager()
+    var myLocation = MKUserLocation()
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -58,10 +59,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        mapView .setCenter(userLocation.coordinate, animated: true)
+        myLocation = userLocation
+        //mapView .setCenter(userLocation.coordinate, animated: true)
     }
 
-
+    @IBAction func myLocationPressed(_ sender: UIButton) {
+        //This located the user central on screen.
+        mapView .setCenter(myLocation.coordinate, animated: true)
+    }
+    
     //Coverting JSON data into array used for annoneations in mapview
     func loadInitialData() {
         // Loading JSON file into variables.
