@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,18 +26,42 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" id="Hk4-O3-brg">
-                                        <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3dF-f4-aKd"/>
+                                    <barButtonItem image="Toolbar Icons P" landscapeImage="Toolbar Icons P" largeContentSizeImage="Toolbar Icons P" width="47" id="Hk4-O3-brg" userLabel="Parking"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="PkM-wi-kqg"/>
+                                    <barButtonItem title="Item" image="Tollbar icon no P" landscapeImage="Tollbar icon no P" largeContentSizeImage="Tollbar icon no P" id="WSc-I5-an7" userLabel="No parking"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kKT-bj-vyk"/>
+                                    <barButtonItem style="plain" id="HsK-Oy-c44">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ort-gy-qdc">
+                                            <rect key="frame" x="134.5" y="7" width="212" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Standard"/>
+                                                <segment title="Satelite"/>
+                                                <segment title="Hybrid"/>
+                                            </segments>
+                                        </segmentedControl>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="g0d-gI-vIY"/>
                                 </items>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcr-Wm-SnE">
+                                <rect key="frame" x="351" y="30" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hcr-Wm-SnE" secondAttribute="height" multiplier="1:1" id="7fv-Li-foF"/>
+                                </constraints>
+                                <state key="normal" image="Tollbar myLocation"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Gv3-32-xOR"/>
+                            <constraint firstItem="hcr-Wm-SnE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="H57-a1-ADv"/>
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KN7-tT-z0q"/>
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Pph-VU-zRR"/>
                             <constraint firstItem="o4s-Mk-jZa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QlW-nu-mee"/>
+                            <constraint firstItem="hcr-Wm-SnE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Yeo-zq-SMw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -50,4 +75,9 @@
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Tollbar icon no P" width="24" height="24"/>
+        <image name="Tollbar myLocation" width="24" height="24"/>
+        <image name="Toolbar Icons P" width="24" height="24"/>
+    </resources>
 </document>
