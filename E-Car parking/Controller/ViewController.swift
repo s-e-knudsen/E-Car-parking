@@ -35,6 +35,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        //Mapvie defalt setup
+        mapView.mapType = .standard
+        mapView.showsUserLocation = true
+        mapView.showsScale = true
+        mapView.showsTraffic = true
+        mapView.showsCompass = true
+        
         //Toolbar transarent
         self.toolBar.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.any, barMetrics: UIBarMetrics.default)
         self.toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
