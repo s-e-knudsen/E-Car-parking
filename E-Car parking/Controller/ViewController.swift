@@ -8,6 +8,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+
+enum MapType: NSInteger {
+    case StandardMap = 0
+    case SatelliteMap = 1
+    case HybridMap = 2
+}
 
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
@@ -18,6 +25,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var toolBar: UIToolbar!
     
+    @IBOutlet weak var mapSelectionBar: UISegmentedControl!
+    @IBOutlet weak var myLocationIcon: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var parkContainer: UIView!
     
@@ -45,6 +54,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //Toolbar transarent
         self.toolBar.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.any, barMetrics: UIBarMetrics.default)
         self.toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
+        
         
         //Make park container with rouded edges
         parkContainer.layer.cornerRadius = 10
@@ -75,6 +85,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //mapView .setCenter(userLocation.coordinate, animated: true)
     }
 
+    @IBAction func mapControl(_ sender: UISegmentedControl) {
+        //Setting the map control view.
+        //This refer to the enum above.
+        switch sender.selectedSegmentIndex {
+        case  MapType.StandardMap.rawValue:
+            mapView.mapType = .standard
+            self.myLocationIcon.tintColor = UIColor.black
+            self.mapSelectionBar.tintColor = UIColor.black
+        case MapType.SatelliteMap.rawValue:
+            mapView.mapType = .satellite
+            self.myLocationIcon.tintColor = UIColor.white
+            self.mapSelectionBar.tintColor = UIColor.white
+        case MapType.HybridMap.rawValue:
+            mapView.mapType = .hybrid
+            self.myLocationIcon.tintColor = UIColor.white
+            self.mapSelectionBar.tintColor = UIColor.white
+        default:
+            break
+        }
+    }
     @IBAction func addParking(_ sender: UIButton) {
         //Add code for adding parking here!
     }

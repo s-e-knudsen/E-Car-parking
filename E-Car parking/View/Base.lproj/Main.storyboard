@@ -41,6 +41,9 @@
                                                 <segment title="Satelite"/>
                                                 <segment title="Hybrid"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="mapControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="ONj-7W-vh6"/>
+                                            </connections>
                                         </segmentedControl>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="g0d-gI-vIY"/>
@@ -94,7 +97,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="mapSelectionBar" destination="ort-gy-qdc" id="CNl-yB-mef"/>
                         <outlet property="mapView" destination="o4s-Mk-jZa" id="9IV-16-2iL"/>
+                        <outlet property="myLocationIcon" destination="WSc-I5-an7" id="Ltz-Mc-W8P"/>
                         <outlet property="parkContainer" destination="tJG-4p-n2j" id="Sh3-Jx-8Gw"/>
                         <outlet property="toolBar" destination="lNc-9j-y7o" id="q62-az-37L"/>
                     </connections>
