@@ -18,8 +18,10 @@ enum MapType: NSInteger {
 
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-   //Global variables and constants
-    var pElements: [MapClass] = []
+   
+   
+    //Global variables and constants
+    var pElements: [MapClass] = [MapClass]()
     let locationManager = CLLocationManager()
     var myLocation = MKUserLocation()
     
