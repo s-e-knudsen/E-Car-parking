@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
 
 enum MapType: NSInteger {
     case StandardMap = 0
@@ -63,6 +64,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // Call init setup
         initsetup()
+        //sendDataToDB() // This is only for testing
     }
 
     func initsetup() {
@@ -72,6 +74,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if locationManager.location?.coordinate != nil {
             let region = MKCoordinateRegion.init(center: (locationManager.location?.coordinate)!, span: span)
             mapView.setRegion(region, animated: true)
+//            print("Cordinate is:")
+//            print(locationManager.location?.coordinate.longitude)
+//            print(locationManager.location?.coordinate.latitude)
         } else {
             print("did not get data")
         }
@@ -148,6 +153,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
-    
+    func sendDataToDB() {
+        let parkingDB = Database.database().reference().child("addon")
+        let parkingDictionary = ["Title": "Parking", "Address": "MyAddres 123", "LON": "12345", "LAT": "98765"]
+        
+        parkingDB.childByAutoId().setValue(parkingDictionary) { (error, referance) in
+            if error != nil {
+                print(error!)
+            } else {
+                print("Data is saved to DB")
+            }
+            
+        }
+    }
 }
 
