@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import Firebase
 
+
 enum MapType: NSInteger {
     case StandardMap = 0
     case SatelliteMap = 1
@@ -74,7 +75,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if locationManager.location?.coordinate != nil {
             let region = MKCoordinateRegion.init(center: (locationManager.location?.coordinate)!, span: span)
             mapView.setRegion(region, animated: true)
-//            print("Cordinate is:")
+ //           print("Cordinate is:")
+//            let longTest : Double = (locationManager.location?.coordinate.latitude)!
+//            let longTestS : String = String(longTest)
+//            print(longTestS)
 //            print(locationManager.location?.coordinate.longitude)
 //            print(locationManager.location?.coordinate.latitude)
         } else {
@@ -114,6 +118,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     @IBAction func addParking(_ sender: UIButton) {
         //Add code for adding parking here!
+        let longDuble : Double = (locationManager.location?.coordinate.longitude)!
+        let latDuble : Double = (locationManager.location?.coordinate.latitude)!
+        
+        let addLON = String(longDuble)
+        let addLAT = String(latDuble)
+        var newPAddress : String = ""
+        
+        //Alert box to insert address
+        var newAddress = UITextField()
+        let alert = UIAlertController(title: "Input address", message: "Write the address - optional", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+            newPAddress = newAddress.text!
+            
+            self.sendDataToDB(LON: addLON, LAT: addLAT, Address: newPAddress)
+            
+        }
+        
+        alert.addAction(action)
+        
+        alert.addTextField { (field) in
+            newAddress = field
+            newAddress.placeholder = "Add Address"
+        }
+        present(alert, animated: true, completion: nil)
+        
+        
     }
     
     @IBAction func deleteParking(_ sender: UIButton) {
@@ -153,9 +183,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
-    func sendDataToDB() {
+    func sendDataToDB(LON: String, LAT: String, Address: String) {
         let parkingDB = Database.database().reference().child("addon")
-        let parkingDictionary = ["Title": "Parking", "Address": "MyAddres 123", "LON": "12345", "LAT": "98765"]
+        let parkingDictionary = ["Title": "Parking", "Address": Address, "LON": LON, "LAT": LAT]
         
         parkingDB.childByAutoId().setValue(parkingDictionary) { (error, referance) in
             if error != nil {
