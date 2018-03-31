@@ -23,7 +23,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
    
    
     //Global variables and constants
-    var pElements: [MapClass] = [MapClass]()
+    //var pElements: [MapClass] = [MapClass]()
+    var pElementsArray: [ParkObejcts] = [ParkObejcts]() //Array to test.
+    
+    
     let locationManager = CLLocationManager()
     var myLocation = MKUserLocation()
     
@@ -38,9 +41,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidLoad()
      
         mapView.delegate = self
-        loadInitialData()
-        mapView.addAnnotations(pElements)
-        
+        //loadInitialData() // was from json file
+        //mapView.addAnnotations(pElements)
+        mapView.addAnnotations(pElementsArray)
         
         //TODO:Set up the location manager here.
         locationManager.delegate = self
@@ -66,6 +69,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Call init setup
         initsetup()
         //sendDataToDB() // This is only for testing
+        retrieveDataFromDB()
     }
 
     func initsetup() {
@@ -120,6 +124,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //Add code for adding parking here!
         let longDuble : Double = (locationManager.location?.coordinate.longitude)!
         let latDuble : Double = (locationManager.location?.coordinate.latitude)!
+        //let myCoordinate = CLLocationCoordinate2D(latitude: latDuble, longitude: longDuble)
         
         let addLON = String(longDuble)
         let addLAT = String(latDuble)
@@ -155,22 +160,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     //Coverting JSON data into array used for annoneations in mapview
-    func loadInitialData() {
-        // Loading JSON file into variables.
-        guard let fileName = Bundle.main.path(forResource: "elements", ofType: "json")
-            else { return }
-        let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
-        //Convert JSON elements one-by-one and use the MapClass attributes to add to array
-        guard
-            let data = optionalData,
-            let json = try? JSONSerialization.jsonObject(with: data),
-            let dictionary = json as? [String: Any],
-            let works = dictionary["data"] as? [[Any]]
-            else { return }
-        let validWorks = works.flatMap { MapClass(json: $0) }
-        pElements.append(contentsOf: validWorks)
-
-    }
+//    func loadInitialData() {
+//        // Loading JSON file into variables.
+//        guard let fileName = Bundle.main.path(forResource: "elements", ofType: "json")
+//            else { return }
+//        let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
+//        //Convert JSON elements one-by-one and use the MapClass attributes to add to array
+//        guard
+//            let data = optionalData,
+//            let json = try? JSONSerialization.jsonObject(with: data),
+//            let dictionary = json as? [String: Any],
+//            let works = dictionary["data"] as? [[Any]]
+//            else { return }
+//        let validWorks = works.compactMap { MapClass(json: $0) }
+//        pElements.append(contentsOf: validWorks)
+//
+//    }
     
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
@@ -183,8 +188,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
+    
+    //MARK: - Database write and read methods
+    
     func sendDataToDB(LON: String, LAT: String, Address: String) {
-        let parkingDB = Database.database().reference().child("addon")
+        let parkingDB = Database.database().reference().child("userCreated")
         let parkingDictionary = ["Title": "Parking", "Address": Address, "LON": LON, "LAT": LAT]
         
         parkingDB.childByAutoId().setValue(parkingDictionary) { (error, referance) in
@@ -193,6 +201,49 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             } else {
                 print("Data is saved to DB")
             }
+            
+        }
+    }
+    
+    func retrieveDataFromDB() {
+
+        let userCreatedParkingDB = Database.database().reference().child("userCreated")
+        let verfiedParkingDB = Database.database().reference().child("Verified")
+        
+        userCreatedParkingDB.observe(.childAdded) { (snapshot) in
+            let snapshotValue = snapshot.value as! Dictionary<String,String>
+
+            let parkAddress = snapshotValue["Address"]!
+            let parkTitle = snapshotValue["Title"]!
+            let parkLON = snapshotValue["LON"]!
+            let parkLAT = snapshotValue["LAT"]!
+            let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
+            
+
+            let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON)
+
+
+            print(parkTitle, parkAddress, parkLAT, parkLON)
+            self.pElementsArray.append(parkInformation)
+            self.mapView.addAnnotations(self.pElementsArray)
+
+        }
+        verfiedParkingDB.observe(.childAdded) { (snapshot) in
+            let snapshotValue = snapshot.value as! Dictionary<String,String>
+            
+            let parkAddress = snapshotValue["Address"]!
+            let parkTitle = snapshotValue["Title"]!
+            let parkLON = snapshotValue["LON"]!
+            let parkLAT = snapshotValue["LAT"]!
+            let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
+            
+            
+            let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON)
+            
+            
+            print(parkTitle, parkAddress, parkLAT, parkLON)
+            self.pElementsArray.append(parkInformation)
+            self.mapView.addAnnotations(self.pElementsArray)
             
         }
     }
