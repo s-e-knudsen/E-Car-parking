@@ -21,12 +21,9 @@ enum MapType: NSInteger {
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
    
-   
-    //Global variables and constants
-    //var pElements: [MapClass] = [MapClass]()
-    var pElementsArray: [ParkObejcts] = [ParkObejcts]() //Array to test.
-    
-    
+    //MARK: - Global variables and constants
+
+    var pElementsArray: [ParkObejcts] = [ParkObejcts]() //Array to parkings that is used for annonations on mapkit.
     let locationManager = CLLocationManager()
     var myLocation = MKUserLocation()
     
@@ -39,11 +36,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        //Set deligate to this class of the mapkit view.
         mapView.delegate = self
-        //loadInitialData() // was from json file
-        //mapView.addAnnotations(pElements)
-        mapView.addAnnotations(pElementsArray)
+
         
         //TODO:Set up the location manager here.
         locationManager.delegate = self
@@ -68,25 +63,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // Call init setup
         initsetup()
-        //sendDataToDB() // This is only for testing
-        retrieveDataFromDB()
     }
 
     func initsetup() {
+        retrieveDataFromDB()
+        mapView.addAnnotations(pElementsArray)
+        
         //Initial setup for the map span and user location.
         let span = MKCoordinateSpan.init(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
     
         if locationManager.location?.coordinate != nil {
             let region = MKCoordinateRegion.init(center: (locationManager.location?.coordinate)!, span: span)
             mapView.setRegion(region, animated: true)
- //           print("Cordinate is:")
-//            let longTest : Double = (locationManager.location?.coordinate.latitude)!
-//            let longTestS : String = String(longTest)
-//            print(longTestS)
-//            print(locationManager.location?.coordinate.longitude)
-//            print(locationManager.location?.coordinate.latitude)
         } else {
-            print("did not get data")
+            print("Error: did not get data")
         }
     }
     
@@ -124,7 +114,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //Add code for adding parking here!
         let longDuble : Double = (locationManager.location?.coordinate.longitude)!
         let latDuble : Double = (locationManager.location?.coordinate.latitude)!
-        //let myCoordinate = CLLocationCoordinate2D(latitude: latDuble, longitude: longDuble)
         
         let addLON = String(longDuble)
         let addLAT = String(latDuble)
@@ -135,20 +124,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let alert = UIAlertController(title: "Input address", message: "Write the address - optional", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             newPAddress = newAddress.text!
-            
             self.sendDataToDB(LON: addLON, LAT: addLAT, Address: newPAddress)
-            
         }
-        
         alert.addAction(action)
-        
         alert.addTextField { (field) in
             newAddress = field
             newAddress.placeholder = "Add Address"
         }
         present(alert, animated: true, completion: nil)
-        
-        
     }
     
     @IBAction func deleteParking(_ sender: UIButton) {
@@ -158,24 +141,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func myLocationPressed(_ sender: UIBarButtonItem) {
         mapView .setCenter(myLocation.coordinate, animated: true)
     }
-    
-    //Coverting JSON data into array used for annoneations in mapview
-//    func loadInitialData() {
-//        // Loading JSON file into variables.
-//        guard let fileName = Bundle.main.path(forResource: "elements", ofType: "json")
-//            else { return }
-//        let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
-//        //Convert JSON elements one-by-one and use the MapClass attributes to add to array
-//        guard
-//            let data = optionalData,
-//            let json = try? JSONSerialization.jsonObject(with: data),
-//            let dictionary = json as? [String: Any],
-//            let works = dictionary["data"] as? [[Any]]
-//            else { return }
-//        let validWorks = works.compactMap { MapClass(json: $0) }
-//        pElements.append(contentsOf: validWorks)
-//
-//    }
     
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
