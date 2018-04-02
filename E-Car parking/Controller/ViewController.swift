@@ -26,6 +26,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var pElementsArray: [ParkObejcts] = [ParkObejcts]() //Array to parkings that is used for annonations on mapkit.
     let locationManager = CLLocationManager()
     var myLocation = MKUserLocation()
+    var pinColor : MKPinAnnotationView = MKPinAnnotationView()
+    
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -33,12 +35,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var myLocationIcon: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var parkContainer: UIView!
+    @IBOutlet weak var addParkingButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set deligate to this class of the mapkit view.
         mapView.delegate = self
 
+       // pinColor.pinTintColor = UIColor.blue
         
         //TODO:Set up the location manager here.
         locationManager.delegate = self
@@ -63,6 +67,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // Call init setup
         initsetup()
+        
+        
     }
 
     func initsetup() {
@@ -82,6 +88,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+       
+        let view : MKMarkerAnnotationView = MKMarkerAnnotationView()
+        view.markerTintColor = UIColor.green
+        view.glyphText = "P"
+        view.glyphTintColor = UIColor.black
+
+
+        return view
 
     }
     
@@ -111,6 +129,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     @IBAction func addParking(_ sender: UIButton) {
+        
+        addParkingButton.isEnabled = false
+        
         //Add code for adding parking here!
         let longDuble : Double = (locationManager.location?.coordinate.longitude)!
         let latDuble : Double = (locationManager.location?.coordinate.latitude)!
@@ -132,6 +153,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             newAddress.placeholder = "Add Address"
         }
         present(alert, animated: true, completion: nil)
+        
+        //Waits 90 secons and the call the enableParkingButton method.
+        Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(ViewController.enableParkingButtons), userInfo: nil, repeats: false)
     }
     
     @IBAction func deleteParking(_ sender: UIButton) {
@@ -152,6 +176,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
+    }
+    
+    @objc func enableParkingButtons () {
+        
+        addParkingButton.isEnabled = true
+        
     }
     
     //MARK: - Database write and read methods
@@ -187,8 +217,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
             let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON)
 
+       
 
             print(parkTitle, parkAddress, parkLAT, parkLON)
+            print("Print UserCreatedDB")
+            print(userCreatedParkingDB)
             self.pElementsArray.append(parkInformation)
             self.mapView.addAnnotations(self.pElementsArray)
 
@@ -203,11 +236,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
             
             
+            
             let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON)
             
             
             print(parkTitle, parkAddress, parkLAT, parkLON)
             self.pElementsArray.append(parkInformation)
+            
             self.mapView.addAnnotations(self.pElementsArray)
             
         }

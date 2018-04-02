@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eF7-rF-IQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eF7-rF-IQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -102,6 +102,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="j59-cO-Lcq"/>
                     <connections>
+                        <outlet property="addParkingButton" destination="2GA-9H-436" id="tY2-ZU-Nhs"/>
                         <outlet property="mapSelectionBar" destination="ort-gy-qdc" id="CNl-yB-mef"/>
                         <outlet property="mapView" destination="o4s-Mk-jZa" id="9IV-16-2iL"/>
                         <outlet property="myLocationIcon" destination="WSc-I5-an7" id="Ltz-Mc-W8P"/>
