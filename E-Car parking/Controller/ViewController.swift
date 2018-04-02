@@ -90,15 +90,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.didReceiveMemoryWarning()
 
     }
-    
+    //MARK: - Annotation - placing obects on the map. 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-       
-        let view : MKMarkerAnnotationView = MKMarkerAnnotationView()
-        view.markerTintColor = UIColor.green
+        var view : MKMarkerAnnotationView = MKMarkerAnnotationView()
+        guard let MyAnnotation = annotation as? ParkObejcts else {return nil}
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: MyAnnotation.address) as? MKMarkerAnnotationView {
+                view = dequeuedView
+            }else {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: MyAnnotation.address)
+            }
+        
+        if MyAnnotation.markerTintColor == UIColor.green {
+            view.glyphTintColor = UIColor.black
+            
+        } else {
+            view.glyphTintColor = UIColor.white
+        }
+        
+        view.markerTintColor = MyAnnotation.markerTintColor
         view.glyphText = "P"
-        view.glyphTintColor = UIColor.black
-
-
+        
         return view
 
     }
@@ -188,7 +199,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func sendDataToDB(LON: String, LAT: String, Address: String) {
         let parkingDB = Database.database().reference().child("userCreated")
-        let parkingDictionary = ["Title": "Parking", "Address": Address, "LON": LON, "LAT": LAT]
+        let parkingDictionary = ["Title": "Parking", "Address": Address, "LON": LON, "LAT": LAT, "typeOfData": "userCreated"]
         
         parkingDB.childByAutoId().setValue(parkingDictionary) { (error, referance) in
             if error != nil {
@@ -212,10 +223,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let parkTitle = snapshotValue["Title"]!
             let parkLON = snapshotValue["LON"]!
             let parkLAT = snapshotValue["LAT"]!
+            let parkType = snapshotValue["typeOfData"]!
             let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
             
 
-            let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON)
+            let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON, typeOfData: parkType)
 
        
 
@@ -228,23 +240,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         verfiedParkingDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String,String>
-            
+
             let parkAddress = snapshotValue["Address"]!
             let parkTitle = snapshotValue["Title"]!
             let parkLON = snapshotValue["LON"]!
             let parkLAT = snapshotValue["LAT"]!
+            let parkType = snapshotValue["typeOfData"]!
             let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
-            
-            
-            
-            let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON)
-            
-            
+
+
+
+            let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON, typeOfData: parkType)
+
+
             print(parkTitle, parkAddress, parkLAT, parkLON)
             self.pElementsArray.append(parkInformation)
-            
+
             self.mapView.addAnnotations(self.pElementsArray)
-            
+
         }
     }
 }
