@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -33,12 +34,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         //action defines here.
-        //SVProgressHUD.show()
+        SVProgressHUD.show()
         Auth.auth().signIn(withEmail: emailTextfield.text!, password: passwordTextfeald.text!) { (user, error) in
             
             if error != nil {
                 print(error!)
-                //SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 //Popup for wrong username or password.
                 let alert = UIAlertController(title: "Wrong username or password enterd", message: nil, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -48,7 +49,7 @@ class LoginViewController: UIViewController {
                 
             } else {
                 print("Login success")
-                //SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "goToApp", sender: self)
                 
             }
