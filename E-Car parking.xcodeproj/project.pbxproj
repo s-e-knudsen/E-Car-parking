@@ -10,6 +10,7 @@
 		156232C7BE82B6C8C1EAFC84 /* Pods_E_Car_parking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C8700037555F4A73A68392 /* Pods_E_Car_parking.framework */; };
 		BA0327E32075462F007F63F2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0327E22075462F007F63F2 /* WelcomeViewController.swift */; };
 		BA0CED37205D4FFE0047FD81 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA0CED36205D4FFE0047FD81 /* GoogleService-Info.plist */; };
+		BA2B24082076484300047022 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B24072076484300047022 /* RegisterViewController.swift */; };
 		BA45898B204C1C4D00AB2761 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45898A204C1C4D00AB2761 /* AppDelegate.swift */; };
 		BA45898D204C1C4D00AB2761 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45898C204C1C4D00AB2761 /* ViewController.swift */; };
 		BA458990204C1C4D00AB2761 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA45898E204C1C4D00AB2761 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		62C8700037555F4A73A68392 /* Pods_E_Car_parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Car_parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0327E22075462F007F63F2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA0CED36205D4FFE0047FD81 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA2B24072076484300047022 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BA458987204C1C4D00AB2761 /* E-Car parking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Car parking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA45898A204C1C4D00AB2761 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA45898C204C1C4D00AB2761 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				BA45898A204C1C4D00AB2761 /* AppDelegate.swift */,
 				BA0327E22075462F007F63F2 /* WelcomeViewController.swift */,
 				BA7ED65B2075EE8000CE2A03 /* LoginViewController.swift */,
+				BA2B24072076484300047022 /* RegisterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				BA482DB9206E5C1200AA682C /* ParkObjects.swift in Sources */,
 				BA0327E32075462F007F63F2 /* WelcomeViewController.swift in Sources */,
 				BA45898D204C1C4D00AB2761 /* ViewController.swift in Sources */,
+				BA2B24082076484300047022 /* RegisterViewController.swift in Sources */,
 				BA7ED65C2075EE8000CE2A03 /* LoginViewController.swift in Sources */,
 				BA45898B204C1C4D00AB2761 /* AppDelegate.swift in Sources */,
 			);
