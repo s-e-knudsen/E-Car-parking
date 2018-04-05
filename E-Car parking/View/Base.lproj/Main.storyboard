@@ -6,14 +6,67 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Logon-->
+        <scene sceneID="bRy-D0-mlB">
+            <objects>
+                <viewController id="tqR-Bl-bNw" userLabel="Logon" customClass="LoginViewController" customModule="E_Car_parking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r9Y-Os-pfX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jHh-BN-eZy">
+                                <rect key="frame" x="16" y="214" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ikp-d7-hBy">
+                                <rect key="frame" x="16" y="164" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4i-yg-gxQ">
+                                <rect key="frame" x="16" y="264" width="343" height="30"/>
+                                <state key="normal" title="Log in"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="tqR-Bl-bNw" eventType="touchUpInside" id="OeN-3F-CCp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wh5-zf-L6k" firstAttribute="trailing" secondItem="Ikp-d7-hBy" secondAttribute="trailing" constant="16" id="1ZI-sS-edN"/>
+                            <constraint firstItem="D4i-yg-gxQ" firstAttribute="top" secondItem="jHh-BN-eZy" secondAttribute="bottom" constant="20" id="Fk0-eb-EsM"/>
+                            <constraint firstItem="jHh-BN-eZy" firstAttribute="top" secondItem="Ikp-d7-hBy" secondAttribute="bottom" constant="20" id="Hdm-6K-1NQ"/>
+                            <constraint firstItem="wh5-zf-L6k" firstAttribute="trailing" secondItem="D4i-yg-gxQ" secondAttribute="trailing" constant="16" id="Idw-rA-vYd"/>
+                            <constraint firstItem="Ikp-d7-hBy" firstAttribute="leading" secondItem="wh5-zf-L6k" secondAttribute="leading" constant="16" id="dxk-WT-bWT"/>
+                            <constraint firstItem="wh5-zf-L6k" firstAttribute="trailing" secondItem="jHh-BN-eZy" secondAttribute="trailing" constant="16" id="hcv-1M-A9J"/>
+                            <constraint firstItem="jHh-BN-eZy" firstAttribute="leading" secondItem="wh5-zf-L6k" secondAttribute="leading" constant="16" id="k2i-E3-UXL"/>
+                            <constraint firstItem="D4i-yg-gxQ" firstAttribute="leading" secondItem="wh5-zf-L6k" secondAttribute="leading" constant="16" id="lwL-Rh-ttc"/>
+                            <constraint firstItem="Ikp-d7-hBy" firstAttribute="top" secondItem="wh5-zf-L6k" secondAttribute="top" constant="100" id="vbB-a4-k2H"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wh5-zf-L6k"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextfield" destination="Ikp-d7-hBy" id="KPq-qf-zik"/>
+                        <outlet property="passwordTextfeald" destination="jHh-BN-eZy" id="Rdh-mB-SQa"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToApp" id="kmS-fX-WKb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0PN-cB-GDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1504.8" y="-317.09145427286359"/>
+        </scene>
+        <!--App-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="E_Car_parking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="App" customClass="ViewController" customModule="E_Car_parking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,6 +102,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="g0d-gI-vIY"/>
                                 </items>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJG-4p-n2j" userLabel="MapIcons container">
                                 <rect key="frame" x="15" y="164" width="40" height="100"/>
@@ -100,7 +154,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="j59-cO-Lcq"/>
+                    <navigationItem key="navigationItem" id="j59-cO-Lcq">
+                        <rightBarButtonItems>
+                            <barButtonItem title="info" image="info" landscapeImage="info" largeContentSizeImage="info" id="vi0-J3-hY9">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                            <barButtonItem title="settings" image="Settings" landscapeImage="Settings" largeContentSizeImage="Settings" id="7dD-Rt-Qoi">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="addParkingButton" destination="2GA-9H-436" id="tY2-ZU-Nhs"/>
                         <outlet property="mapSelectionBar" destination="ort-gy-qdc" id="CNl-yB-mef"/>
@@ -112,7 +175,69 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2351" y="134"/>
+        </scene>
+        <!--Welcome-->
+        <scene sceneID="dR6-lw-qaG">
+            <objects>
+                <viewController id="Gdr-dQ-gKc" customClass="WelcomeViewController" customModule="E_Car_parking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="spB-ba-uAE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7g-FY-2Jn">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.54509803921568623" green="0.76470588235294112" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="rvu-EX-xi4"/>
+                                </constraints>
+                                <size key="titleShadowOffset" width="0.0" height="45"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="tqR-Bl-bNw" kind="show" identifier="goToLogin" id="JW0-ju-KNR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBZ-Fb-7Z2">
+                                <rect key="frame" x="0.0" y="577" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.29803921568627451" green="0.68627450980392157" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Bx5-Zw-RmX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <size key="titleShadowOffset" width="0.0" height="45"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="kdp-SX-0w7">
+                                <rect key="frame" x="0.0" y="64" width="375" height="513"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fBZ-Fb-7Z2" firstAttribute="top" secondItem="kdp-SX-0w7" secondAttribute="bottom" id="0Am-wd-Lin"/>
+                            <constraint firstItem="q7g-FY-2Jn" firstAttribute="leading" secondItem="uSx-DM-tqs" secondAttribute="leading" id="0CI-YP-Ald"/>
+                            <constraint firstItem="q7g-FY-2Jn" firstAttribute="bottom" secondItem="uSx-DM-tqs" secondAttribute="bottom" id="2YQ-Gv-dBW"/>
+                            <constraint firstItem="q7g-FY-2Jn" firstAttribute="top" secondItem="fBZ-Fb-7Z2" secondAttribute="bottom" id="CJM-Em-Rwi"/>
+                            <constraint firstItem="fBZ-Fb-7Z2" firstAttribute="trailing" secondItem="uSx-DM-tqs" secondAttribute="trailing" id="CW2-Pu-knq"/>
+                            <constraint firstItem="fBZ-Fb-7Z2" firstAttribute="leading" secondItem="uSx-DM-tqs" secondAttribute="leading" id="Gc9-xD-oap"/>
+                            <constraint firstItem="q7g-FY-2Jn" firstAttribute="trailing" secondItem="uSx-DM-tqs" secondAttribute="trailing" id="Y3Q-FP-GNb"/>
+                            <constraint firstItem="kdp-SX-0w7" firstAttribute="trailing" secondItem="uSx-DM-tqs" secondAttribute="trailing" id="a3H-JY-0QY"/>
+                            <constraint firstItem="kdp-SX-0w7" firstAttribute="top" secondItem="uSx-DM-tqs" secondAttribute="top" id="jWb-S2-UsU"/>
+                            <constraint firstItem="kdp-SX-0w7" firstAttribute="leading" secondItem="uSx-DM-tqs" secondAttribute="leading" id="nSU-ge-jtr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uSx-DM-tqs"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Welcome" id="FLA-uG-rdT"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToApp" id="VFK-Qu-8N7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WO3-c0-mcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653.60000000000002" y="133.5832083958021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="y5f-kt-l97">
@@ -122,10 +247,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="22o-dX-esM">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hjl-xs-Ywq"/>
+                        <segue destination="Gdr-dQ-gKc" kind="relationship" relationship="rootViewController" id="ir2-nF-N5g"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwU-00-5n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -134,8 +260,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Settings" width="16" height="16"/>
         <image name="Tollbar icon no P" width="24" height="24"/>
         <image name="Tollbar myLocation" width="24" height="24"/>
         <image name="Toolbar Icons P" width="24" height="24"/>
+        <image name="background" width="187" height="282"/>
+        <image name="info" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VFK-Qu-8N7"/>
+    </inferredMetricsTieBreakers>
 </document>
