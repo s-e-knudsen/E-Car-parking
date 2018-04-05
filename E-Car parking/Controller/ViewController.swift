@@ -188,6 +188,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
+   
+// Do not work. 
+//    override func viewWillAppear(_ animated: Bool) {
+//        //add gesture info here ??
+//        let gestureRecognizer = UITapGestureRecognizer(target: self, action:Selector(("triggerTouchAction:")))
+//        gestureRecognizer.delegate = self as? UIGestureRecognizerDelegate
+//        mapView.addGestureRecognizer(gestureRecognizer)
+//    }
+//
+//    func triggerTouchAction(gestureReconizer: UILongPressGestureRecognizer) {
+//        //Add alert to show it works
+//        print("triggerTouchAction works")
+//
+//    }
     
     @objc func enableParkingButtons () {
         
