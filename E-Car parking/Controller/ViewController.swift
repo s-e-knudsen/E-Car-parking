@@ -238,7 +238,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @objc func enableParkingButtons () {
-        
+        //Setting the buttons active again.
         addParkingButton.isEnabled = true
         deleteParkingButton.isEnabled = true
         
@@ -267,46 +267,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         userCreatedParkingDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String,String>
-
             let parkAddress = snapshotValue["Address"]!
             let parkTitle = snapshotValue["Title"]!
             let parkLON = snapshotValue["LON"]!
             let parkLAT = snapshotValue["LAT"]!
             let parkType = snapshotValue["typeOfData"]!
             let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
-            
-
             let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON, typeOfData: parkType)
-
-       
-
-            print(parkTitle, parkAddress, parkLAT, parkLON)
-            print("Print UserCreatedDB")
-            print(userCreatedParkingDB)
             self.pElementsArray.append(parkInformation)
             self.mapView.addAnnotations(self.pElementsArray)
 
         }
         verfiedParkingDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String,String>
-
             let parkAddress = snapshotValue["Address"]!
             let parkTitle = snapshotValue["Title"]!
             let parkLON = snapshotValue["LON"]!
             let parkLAT = snapshotValue["LAT"]!
             let parkType = snapshotValue["typeOfData"]!
             let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
-
-
-
             let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON, typeOfData: parkType)
-
-
-            print(parkTitle, parkAddress, parkLAT, parkLON)
             self.pElementsArray.append(parkInformation)
-
             self.mapView.addAnnotations(self.pElementsArray)
-
         }
     }
 }
