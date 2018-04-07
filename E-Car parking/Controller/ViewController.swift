@@ -19,7 +19,7 @@ enum MapType: NSInteger {
 }
 
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
    
     //MARK: - Global variables and constants
 
@@ -27,7 +27,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let locationManager = CLLocationManager()
     var myLocation = MKUserLocation()
     var pinColor : MKPinAnnotationView = MKPinAnnotationView()
-    
+    var centerMap: Bool = true
+   
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -39,11 +40,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Set deligate to this class of the mapkit view.
         mapView.delegate = self
-
-       // pinColor.pinTintColor = UIColor.blue
-        
+    
         //TODO:Set up the location manager here.
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -116,7 +114,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         myLocation = userLocation
-        //mapView .setCenter(userLocation.coordinate, animated: true)
+        
+        if centerMap == true {
+            mapView .setCenter(userLocation.coordinate, animated: true)
+        } else {
+           return
+        }
     }
 
     @IBAction func mapControl(_ sender: UISegmentedControl) {
@@ -169,11 +172,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(ViewController.enableParkingButtons), userInfo: nil, repeats: false)
     }
     
+ 
     @IBAction func deleteParking(_ sender: UIButton) {
         //Add code for delete (request) for parking here!
     }
     
     @IBAction func myLocationPressed(_ sender: UIBarButtonItem) {
+        centerMap = true
         mapView .setCenter(myLocation.coordinate, animated: true)
     }
     
@@ -189,19 +194,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         checkLocationAuthorizationStatus()
     }
    
-// Do not work. 
-//    override func viewWillAppear(_ animated: Bool) {
-//        //add gesture info here ??
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action:Selector(("triggerTouchAction:")))
-//        gestureRecognizer.delegate = self as? UIGestureRecognizerDelegate
-//        mapView.addGestureRecognizer(gestureRecognizer)
-//    }
-//
-//    func triggerTouchAction(gestureReconizer: UILongPressGestureRecognizer) {
-//        //Add alert to show it works
-//        print("triggerTouchAction works")
-//
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(setgestvar(_:)))
+        panGesture.delegate = self
+        mapView.addGestureRecognizer(panGesture)
+    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    @objc func setgestvar(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.ended) {
+            centerMap = false
+           
+        }
+        
+    }
     
     @objc func enableParkingButtons () {
         
