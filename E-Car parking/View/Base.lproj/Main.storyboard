@@ -186,6 +186,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addParkingButton" destination="2GA-9H-436" id="tY2-ZU-Nhs"/>
+                        <outlet property="deleteParkingButton" destination="oeg-eg-hof" id="ezd-dS-Arf"/>
                         <outlet property="mapSelectionBar" destination="ort-gy-qdc" id="CNl-yB-mef"/>
                         <outlet property="mapView" destination="o4s-Mk-jZa" id="9IV-16-2iL"/>
                         <outlet property="myLocationIcon" destination="WSc-I5-an7" id="Ltz-Mc-W8P"/>

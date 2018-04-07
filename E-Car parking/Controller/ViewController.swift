@@ -37,6 +37,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var parkContainer: UIView!
     @IBOutlet weak var addParkingButton: UIButton!
+    @IBOutlet weak var deleteParkingButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +160,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let alert = UIAlertController(title: "Input address", message: "Write the address - optional", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             newPAddress = newAddress.text!
-            self.sendDataToDB(LON: addLON, LAT: addLAT, Address: newPAddress)
+            self.sendDataToDB(LON: addLON, LAT: addLAT, Address: newPAddress, Datatype: "userCreated")
         }
         alert.addAction(action)
         alert.addTextField { (field) in
@@ -174,7 +175,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
  
     @IBAction func deleteParking(_ sender: UIButton) {
+        
+        deleteParkingButton.isEnabled = false
         //Add code for delete (request) for parking here!
+        let longDuble : Double = (locationManager.location?.coordinate.longitude)!
+        let latDuble : Double = (locationManager.location?.coordinate.latitude)!
+        let delLON = String(longDuble)
+        let delLAT = String(latDuble)
+        var delPAddress : String = ""
+        
+        //Alert box to insert address
+        var delAddress = UITextField()
+        let alert = UIAlertController(title: "Delete request", message: "Write the addresse to delete - optional", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Send", style: .default) { (action) in
+            delPAddress = delAddress.text!
+            self.sendDataToDB(LON: delLON, LAT: delLAT, Address: delPAddress, Datatype: "forDeletion")
+        }
+        alert.addAction(action)
+        alert.addTextField { (field) in
+            delAddress = field
+            delAddress.placeholder = "Enter address"
+        }
+        present(alert, animated: true, completion: nil)
+        
+        //Waits 90 secons and the call the enableParkingButton method.
+        Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(ViewController.enableParkingButtons), userInfo: nil, repeats: false)
+        
     }
     
     @IBAction func myLocationPressed(_ sender: UIBarButtonItem) {
@@ -206,7 +232,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @objc func setgestvar(_ gestureRecognizer: UIPanGestureRecognizer) {
         if (gestureRecognizer.state == UIGestureRecognizerState.ended) {
             centerMap = false
-           
+            
         }
         
     }
@@ -214,14 +240,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @objc func enableParkingButtons () {
         
         addParkingButton.isEnabled = true
+        deleteParkingButton.isEnabled = true
         
     }
     
     //MARK: - Database write and read methods
     
-    func sendDataToDB(LON: String, LAT: String, Address: String) {
-        let parkingDB = Database.database().reference().child("userCreated")
-        let parkingDictionary = ["Title": "Parking", "Address": Address, "LON": LON, "LAT": LAT, "typeOfData": "userCreated"]
+    func sendDataToDB(LON: String, LAT: String, Address: String, Datatype: String) {
+        let parkingDB = Database.database().reference().child(Datatype)
+        let parkingDictionary = ["Title": "Parking", "Address": Address, "LON": LON, "LAT": LAT, "typeOfData": Datatype]
         
         parkingDB.childByAutoId().setValue(parkingDictionary) { (error, referance) in
             if error != nil {
