@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -175,14 +174,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="j59-cO-Lcq">
-                        <rightBarButtonItems>
-                            <barButtonItem title="info" image="info" landscapeImage="info" largeContentSizeImage="info" id="vi0-J3-hY9">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
-                            <barButtonItem title="settings" image="Settings" landscapeImage="Settings" largeContentSizeImage="Settings" id="7dD-Rt-Qoi">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings" landscapeImage="Settings" largeContentSizeImage="Settings" id="V6m-Tz-Hgo">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="A7h-rB-Fjy" kind="show" identifier="goToSettings" id="zAz-VN-s0T"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addParkingButton" destination="2GA-9H-436" id="tY2-ZU-Nhs"/>
@@ -197,6 +194,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2351" y="134"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="Bai-e2-VlQ">
+            <objects>
+                <viewController id="A7h-rB-Fjy" customClass="SettingsViewController" customModule="E_Car_parking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7wt-5n-Ccj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naI-lR-9Fi">
+                                <rect key="frame" x="141" y="188" width="98" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Information"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="YTd-n5-R0w"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HjS-KM-rwy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3289" y="134"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="dR6-lw-qaG">
@@ -271,6 +290,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="22o-dX-esM">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -355,14 +375,13 @@
     </scenes>
     <resources>
         <image name="Background2" width="1666" height="1111"/>
-        <image name="Settings" width="16" height="16"/>
+        <image name="Settings" width="24" height="24"/>
         <image name="Tollbar icon no P" width="24" height="24"/>
         <image name="Tollbar myLocation" width="24" height="24"/>
         <image name="Toolbar Icons P" width="24" height="24"/>
         <image name="background" width="187" height="282"/>
-        <image name="info" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cBk-jD-w7S"/>
+        <segue reference="kmS-fX-WKb"/>
     </inferredMetricsTieBreakers>
 </document>

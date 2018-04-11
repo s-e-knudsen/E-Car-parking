@@ -18,6 +18,7 @@
 		BA458995204C1C4D00AB2761 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA458993204C1C4D00AB2761 /* LaunchScreen.storyboard */; };
 		BA482DB9206E5C1200AA682C /* ParkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA482DB8206E5C1200AA682C /* ParkObjects.swift */; };
 		BA7ED65C2075EE8000CE2A03 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7ED65B2075EE8000CE2A03 /* LoginViewController.swift */; };
+		BAD00AB720796B600036D850 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD00AB620796B600036D850 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		BA458996204C1C4D00AB2761 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA482DB8206E5C1200AA682C /* ParkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkObjects.swift; sourceTree = "<group>"; };
 		BA7ED65B2075EE8000CE2A03 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BAD00AB620796B600036D850 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E4580FD90B521FC058FD2EC6 /* Pods-E-Car parking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Car parking.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-Car parking/Pods-E-Car parking.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				BA0327E22075462F007F63F2 /* WelcomeViewController.swift */,
 				BA7ED65B2075EE8000CE2A03 /* LoginViewController.swift */,
 				BA2B24072076484300047022 /* RegisterViewController.swift */,
+				BAD00AB620796B600036D850 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				BA2B24082076484300047022 /* RegisterViewController.swift in Sources */,
 				BA7ED65C2075EE8000CE2A03 /* LoginViewController.swift in Sources */,
 				BA45898B204C1C4D00AB2761 /* AppDelegate.swift in Sources */,
+				BAD00AB720796B600036D850 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
