@@ -23,11 +23,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
    
     //MARK: - Global variables and constants
 
+    var userDefaults = UserDefaults.standard
     var pElementsArray: [ParkObejcts] = [ParkObejcts]() //Array to parkings that is used for annonations on mapkit.
     let locationManager = CLLocationManager()
     var myLocation = MKUserLocation()
     var pinColor : MKPinAnnotationView = MKPinAnnotationView()
     var centerMap: Bool = true
+    //var userDataSwitchEnabled : Bool = false
    
     
     @IBOutlet weak var toolBar: UIToolbar!
@@ -42,6 +44,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        
+//        guard userDataSwitchEnabled == userDefaults.bool(forKey: "UserSwitch") else {
+//            return
+//        }
+        
     
         //TODO:Set up the location manager here.
         locationManager.delegate = self
@@ -224,6 +231,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(setgestvar(_:)))
         panGesture.delegate = self
         mapView.addGestureRecognizer(panGesture)
+        
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
@@ -241,6 +249,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //Setting the buttons active again.
         addParkingButton.isEnabled = true
         deleteParkingButton.isEnabled = true
+        
         
     }
     
@@ -264,6 +273,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
         let userCreatedParkingDB = Database.database().reference().child("userCreated")
         let verfiedParkingDB = Database.database().reference().child("Verified")
+        let uDefaults = UserDefaults.standard.bool(forKey: "UserSwitch")
+        if  uDefaults == true {
         
         userCreatedParkingDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String,String>
@@ -289,6 +300,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON, typeOfData: parkType)
             self.pElementsArray.append(parkInformation)
             self.mapView.addAnnotations(self.pElementsArray)
+        }
+        } else {
+            verfiedParkingDB.observe(.childAdded) { (snapshot) in
+                let snapshotValue = snapshot.value as! Dictionary<String,String>
+                let parkAddress = snapshotValue["Address"]!
+                let parkTitle = snapshotValue["Title"]!
+                let parkLON = snapshotValue["LON"]!
+                let parkLAT = snapshotValue["LAT"]!
+                let parkType = snapshotValue["typeOfData"]!
+                let coordinate = CLLocationCoordinate2D(latitude: Double(parkLAT)!, longitude: Double(parkLON)!)
+                let parkInformation = ParkObejcts(title: parkTitle, address: parkAddress, coordinate: coordinate, LAT: parkLAT, LON: parkLON, typeOfData: parkType)
+                self.pElementsArray.append(parkInformation)
+                self.mapView.addAnnotations(self.pElementsArray)
+            }
         }
     }
 }
