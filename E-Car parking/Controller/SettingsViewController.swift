@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController {
        
         //settingsSwitch.isOn = vc.userDataSwitchEnabled
         self.settingsSwitch.addTarget(self, action: #selector(switchstatedchenged), for: UIControlEvents.valueChanged)
-        userEmailAdress.text = Auth.auth().currentUser?.email
+        userEmailAdress.text = "Login name:    " + (Auth.auth().currentUser?.email)!
     }
 
     override func didReceiveMemoryWarning() {
