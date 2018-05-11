@@ -152,7 +152,6 @@
 				BA458984204C1C4D00AB2761 /* Frameworks */,
 				BA458985204C1C4D00AB2761 /* Resources */,
 				E821F32EBE701842AF8C9059 /* [CP] Embed Pods Frameworks */,
-				D011485B8FB9D68D0C9FF1C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,21 +219,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D011485B8FB9D68D0C9FF1C6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-E-Car parking/Pods-E-Car parking-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E109775B6D2FB3235EAF1ED0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
